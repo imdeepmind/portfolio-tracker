@@ -309,7 +309,7 @@ export default function HomePage() {
             </div>
 
             {/* Middle row: Risk Dist + Monthly PnL */}
-            <div className="grid grid-cols-1 xl:grid-cols-2 gap-6 h-auto xl:h-[400px]">
+            <div className="grid grid-cols-1 xl:grid-cols-[30%_70%] gap-6 h-auto xl:h-[400px]">
               <div className="h-[350px] xl:h-full">
                 <HoldingsDistributionChart data={riskDistributionData} />
               </div>
