@@ -21,9 +21,11 @@ interface DashboardData {
   totalInvestmentCurrentMonth: number;
   currentMonthProfit: number;
   profitLastSixMonths: number;
+  averageProfitLastSixMonths: number;
   totalProfitableMonths: number;
   totalMonths: number;
   monthlyTargetReturn: number;
+  realisticMonthlyTargetReturn: number;
   monthlyData: {
     month: string;
     totalPortfolioSize: number;
@@ -244,6 +246,7 @@ export default function HomePage() {
             <StatCard
               label="Profit Last 6 Months"
               value={`${data.profitLastSixMonths >= 0 ? '+' : ''}${formatCurrency(data.profitLastSixMonths)}`}
+              subValue={`Avg ${formatCurrency(data.averageProfitLastSixMonths)}/month`}
               trend={profitTrend(data.profitLastSixMonths)}
               icon={
                 <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -285,9 +288,9 @@ export default function HomePage() {
             />
 
             <StatCard
-              label="Monthly Target (22%/yr)"
+              label="Monthly Target"
               value={formatCurrency(data.monthlyTargetReturn)}
-              subValue="Target return per month"
+              subValue={`Realistic: ${formatCurrency(data.realisticMonthlyTargetReturn)} (10%/yr)`}
               icon={
                 <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                   <path
