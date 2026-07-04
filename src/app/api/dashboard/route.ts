@@ -183,9 +183,16 @@ export async function GET() {
       if (curr > prev) totalProfitableMonths++;
     }
 
+    // Average profit per month (last 6 months)
+    const averageProfitLastSixMonths = profitLastSixMonths / 6;
+
     // Target monthly return (yearly 22%)
     const yearlyTargetRate = 0.22;
     const monthlyTargetReturn = (totalPortfolioSize * yearlyTargetRate) / 12;
+
+    // Realistic monthly target (10% yearly)
+    const realisticYearlyTargetRate = 0.1;
+    const realisticMonthlyTargetReturn = (totalPortfolioSize * realisticYearlyTargetRate) / 12;
 
     return NextResponse.json({
       totalAmountInvested,
@@ -194,9 +201,11 @@ export async function GET() {
       totalInvestmentCurrentMonth,
       currentMonthProfit,
       profitLastSixMonths,
+      averageProfitLastSixMonths,
       totalProfitableMonths,
       totalMonths: monthlyStats.length,
       monthlyTargetReturn,
+      realisticMonthlyTargetReturn,
       monthlyData: monthlyStats, // Include new detailed data for charts
     });
   } catch (error) {
