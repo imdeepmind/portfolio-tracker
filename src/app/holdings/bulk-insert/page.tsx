@@ -8,6 +8,7 @@ import GlassCard from '@/components/bits/GlassCard';
 import Input from '@/components/bits/Input';
 import Button from '@/components/bits/Button';
 import BackLink from '@/components/bits/BackLink';
+import { toLocalDateTimeString, toTimezoneAwareString } from '@/lib/datetime';
 
 interface Holding {
   _id: string;
@@ -20,7 +21,7 @@ export default function BulkInsertTransactionPage() {
   const [currentIndex, setCurrentIndex] = useState(0);
   const [amount, setAmount] = useState('');
   const [totalPortfolioSize, setTotalPortfolioSize] = useState('');
-  const [dateTime, setDateTime] = useState(new Date().toISOString().slice(0, 16));
+  const [dateTime, setDateTime] = useState(toLocalDateTimeString(new Date()));
   const [sameAsPrevious, setSameAsPrevious] = useState(false);
   const [loading, setLoading] = useState(false);
   const [fetchingHoldings, setFetchingHoldings] = useState(true);
@@ -78,7 +79,7 @@ export default function BulkInsertTransactionPage() {
       setAmount('');
       setTotalPortfolioSize('');
       setSameAsPrevious(false);
-      setDateTime(new Date().toISOString().slice(0, 16));
+      setDateTime(toLocalDateTimeString(new Date()));
     } else {
       toast.success('All holdings processed');
       router.push('/holdings');
@@ -96,7 +97,7 @@ export default function BulkInsertTransactionPage() {
         body: JSON.stringify({
           amount: parseFloat(amount),
           totalPortfolioSize: parseFloat(totalPortfolioSize),
-          dateTime,
+          dateTime: toTimezoneAwareString(dateTime),
         }),
       });
 

@@ -9,6 +9,7 @@ import Input from '@/components/bits/Input';
 import Button from '@/components/bits/Button';
 import BackLink from '@/components/bits/BackLink';
 import { PageSpinner } from '@/components/bits/Spinner';
+import { toLocalDateTimeString, toTimezoneAwareString } from '@/lib/datetime';
 
 export default function EditTransactionPage({
   params,
@@ -31,7 +32,7 @@ export default function EditTransactionPage({
         const data = await res.json();
         setAmount(data.amount.toString());
         setTotalPortfolioSize(data.totalPortfolioSize.toString());
-        setDateTime(new Date(data.dateTime).toISOString().slice(0, 16));
+        setDateTime(toLocalDateTimeString(new Date(data.dateTime)));
       } catch {
         toast.error('Failed to load transaction');
         router.push(`/holdings/${holdingId}/transactions`);
@@ -53,7 +54,7 @@ export default function EditTransactionPage({
         body: JSON.stringify({
           amount: parseFloat(amount),
           totalPortfolioSize: parseFloat(totalPortfolioSize),
-          dateTime,
+          dateTime: toTimezoneAwareString(dateTime),
         }),
       });
 

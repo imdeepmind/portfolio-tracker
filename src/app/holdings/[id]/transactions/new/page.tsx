@@ -8,13 +8,14 @@ import GlassCard from '@/components/bits/GlassCard';
 import Input from '@/components/bits/Input';
 import Button from '@/components/bits/Button';
 import BackLink from '@/components/bits/BackLink';
+import { toLocalDateTimeString, toTimezoneAwareString } from '@/lib/datetime';
 
 export default function NewTransactionPage({ params }: { params: Promise<{ id: string }> }) {
   const { id: holdingId } = use(params);
   const router = useRouter();
   const [amount, setAmount] = useState('');
   const [totalPortfolioSize, setTotalPortfolioSize] = useState('');
-  const [dateTime, setDateTime] = useState(new Date().toISOString().slice(0, 16));
+  const [dateTime, setDateTime] = useState(toLocalDateTimeString(new Date()));
   const [loading, setLoading] = useState(false);
 
   const handleSubmit = async (e: React.FormEvent) => {
@@ -28,7 +29,7 @@ export default function NewTransactionPage({ params }: { params: Promise<{ id: s
         body: JSON.stringify({
           amount: parseFloat(amount),
           totalPortfolioSize: parseFloat(totalPortfolioSize),
-          dateTime,
+          dateTime: toTimezoneAwareString(dateTime),
         }),
       });
 

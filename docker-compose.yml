@@ -10,7 +10,7 @@ services:
     ports:
       - '3000:3000'
     environment:
-      - MONGODB_URI=mongodb://admin:admin123@mongo:27017/portfolio?authSource=admin
+      - MONGODB_URI=mongodb+srv://imdeepmind:8qLIJK6fPNwqvDzT@imdeepmind.9dwtmat.mongodb.net/?appName=Imdeepmind
       - NEXTAUTH_SECRET=development_secret_only
       - NEXTAUTH_URL=http://localhost:3000
     volumes:
