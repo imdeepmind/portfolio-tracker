@@ -9,10 +9,7 @@ services:
     restart: unless-stopped
     ports:
       - '3000:3000'
-    environment:
-      - MONGODB_URI=mongodb+srv://imdeepmind:8qLIJK6fPNwqvDzT@imdeepmind.9dwtmat.mongodb.net/?appName=Imdeepmind
-      - NEXTAUTH_SECRET=development_secret_only
-      - NEXTAUTH_URL=http://localhost:3000
+    env_file: .env.local
     volumes:
       - .:/app
       - /app/node_modules
@@ -26,9 +23,7 @@ services:
     restart: unless-stopped
     ports:
       - '27017:27017'
-    environment:
-      MONGO_INITDB_ROOT_USERNAME: admin
-      MONGO_INITDB_ROOT_PASSWORD: admin123
+    env_file: .env.local
     volumes:
       - mongo-data:/data/db
 
