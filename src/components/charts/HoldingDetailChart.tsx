@@ -29,12 +29,21 @@ interface HoldingDetailChartProps {
 export default function HoldingDetailChart({ holdingName, data }: HoldingDetailChartProps) {
   const sanitizedName = holdingName.replace(/\s+/g, '-');
 
+  const cleanedData = data.map((item) => {
+    return {
+      ...item,
+      monthlyInvestment: Math.max(item.monthlyInvestment, 0),
+      portfolioValue: Math.max(item.portfolioValue, 0),
+      totalInvestment: Math.max(item.totalInvestment, 0),
+    };
+  });
+
   return (
     <GlassCard padding="md" className="w-full h-full flex flex-col">
       <h3 className="text-lg font-semibold text-white mb-4">{holdingName} Performance</h3>
       <div className="flex-1 min-h-[250px]">
         <ResponsiveContainer width="100%" height="100%">
-          <AreaChart data={data} margin={{ top: 10, right: 0, left: -20, bottom: 0 }}>
+          <AreaChart data={cleanedData} margin={{ top: 10, right: 0, left: -20, bottom: 0 }}>
             <defs>
               <linearGradient id={`colorHoldingPort-${sanitizedName}`} x1="0" y1="0" x2="0" y2="1">
                 <stop offset="5%" stopColor="#818cf8" stopOpacity={0.3} />

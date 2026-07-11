@@ -10,6 +10,7 @@ import GlassCard from '@/components/bits/GlassCard';
 interface LedgerEntry {
   month: string;
   totalAmountInvested: number;
+  monthlyInvestment: number;
   totalPortfolioSize: number;
   totalProfit: number;
   profitPercent: number;
@@ -68,6 +69,9 @@ export default function LedgerPage() {
                   Total Investment
                 </th>
                 <th className="px-6 py-4 text-xs font-semibold uppercase tracking-wider text-gray-400">
+                  Monthly Investment
+                </th>
+                <th className="px-6 py-4 text-xs font-semibold uppercase tracking-wider text-gray-400">
                   Portfolio Size
                 </th>
                 <th className="px-6 py-4 text-xs font-semibold uppercase tracking-wider text-gray-400 text-right">
@@ -89,6 +93,11 @@ export default function LedgerPage() {
                   <td className="px-6 py-5">
                     <span className="text-sm text-gray-300">
                       {formatCurrency(entry.totalAmountInvested)}
+                    </span>
+                  </td>
+                  <td className="px-6 py-5">
+                    <span className="text-sm text-gray-300">
+                      {formatCurrency(entry.monthlyInvestment)}
                     </span>
                   </td>
                   <td className="px-6 py-5">
