@@ -40,6 +40,7 @@ export async function GET() {
       totalPortfolioSize: number;
       totalProfit: number;
       profitPercent: number;
+      monthlyInvestment: number;
       monthlyIncome: number;
       monthlyIncomePercent: number;
     }
@@ -84,12 +85,16 @@ export async function GET() {
       const monthlyIncomePercent =
         totalAmountInvested > 0 ? (monthlyIncome / totalAmountInvested) * 100 : 0;
 
+      // Calculate total monthly investment amount (sum of transaction amounts for the month)
+      const monthlyInvestment = monthItems.reduce((sum, i) => sum + (i.monthlyAmount || 0), 0);
+
       ledgerData.push({
         month: monthKey,
         totalAmountInvested,
         totalPortfolioSize,
         totalProfit,
         profitPercent: Number(profitPercent.toFixed(2)),
+        monthlyInvestment,
         monthlyIncome,
         monthlyIncomePercent: Number(monthlyIncomePercent.toFixed(2)),
       });

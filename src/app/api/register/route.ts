@@ -4,6 +4,10 @@ import dbConnect from '@/lib/mongodb';
 import User from '@/models/User';
 
 export async function POST(req: NextRequest) {
+  if (process.env.REGISTRATION_ENABLED !== '1') {
+    return NextResponse.json({ error: 'Registration is closed' }, { status: 403 });
+  }
+
   try {
     const { username, password } = await req.json();
 
