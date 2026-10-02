@@ -160,7 +160,7 @@ export default function HomePage() {
       ) : (
         <>
           {/* Stat Cards */}
-          <div className="grid gap-4 grid-cols-1 md:grid-cols-3 xl:grid-cols-4 2xl:grid-cols-8 relative z-10">
+          <div className="grid gap-6 grid-cols-1 md:grid-cols-3 xl:grid-cols-4 2xl:grid-cols-8 relative z-10">
             <StatCard
               label="Total Amount Invested"
               value={formatCurrency(data.totalAmountInvested)}
@@ -305,18 +305,18 @@ export default function HomePage() {
           </div>
 
           {/* Charts Section */}
-          <div className="mt-8 space-y-6 relative z-10 text-white">
+          <div className="mt-6 space-y-6 relative z-10 text-white">
             {/* Portfolio Overview */}
             <div className="h-[400px]">
               <PortfolioOverviewChart data={portfolioOverviewData} />
             </div>
 
             {/* Middle row: Risk Dist + Monthly PnL */}
-            <div className="grid grid-cols-1 xl:grid-cols-[30%_70%] gap-6 h-auto xl:h-[400px]">
-              <div className="h-[350px] xl:h-full">
+            <div className="grid grid-cols-1 xl:grid-cols-[3fr_7fr] gap-6 h-auto xl:h-[400px]">
+              <div className="h-[350px] xl:h-full min-w-0 overflow-hidden">
                 <HoldingsDistributionChart data={riskDistributionData} />
               </div>
-              <div className="h-[350px] xl:h-full">
+              <div className="h-[350px] xl:h-full min-w-0 overflow-hidden">
                 <MonthlyPnLChart data={monthlyPnlData} />
               </div>
             </div>
@@ -327,7 +327,7 @@ export default function HomePage() {
             </div>
 
             {/* Individual Holding Overviews */}
-            <div className="pt-2">
+            <div>
               <div className="grid grid-cols-1 md:grid-cols-2 2xl:grid-cols-3 gap-6">
                 {Object.entries(holdingDetailData).map(([name, history]) => (
                   <div key={name} className="h-[400px]">
