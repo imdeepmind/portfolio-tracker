@@ -54,6 +54,20 @@ const navLinks = [
       </svg>
     ),
   },
+  {
+    href: '/calculator',
+    label: 'Calculator',
+    icon: (
+      <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+        <path
+          strokeLinecap="round"
+          strokeLinejoin="round"
+          strokeWidth={1.8}
+          d="M9 7h6a2 2 0 012 2v10a2 2 0 01-2 2H9a2 2 0 01-2-2V9a2 2 0 012-2z M9 7V5a1 1 0 011-1h4a1 1 0 011 1v2 M9 13h6 M9 17h6 M12 13v4"
+        />
+      </svg>
+    ),
+  },
 ];
 
 export default function Sidebar({ open, onClose }: SidebarProps) {
