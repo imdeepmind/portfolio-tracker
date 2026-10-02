@@ -6,6 +6,7 @@ import DashboardLayout from '@/components/items/DashboardLayout';
 import { PageSpinner } from '@/components/bits/Spinner';
 import { formatCurrency } from '@/lib/constants';
 import GlassCard from '@/components/bits/GlassCard';
+import Button from '@/components/bits/Button';
 
 interface LedgerEntry {
   month: string;
@@ -21,6 +22,7 @@ interface LedgerEntry {
 export default function LedgerPage() {
   const [data, setData] = useState<LedgerEntry[]>([]);
   const [loading, setLoading] = useState(true);
+  const [downloading, setDownloading] = useState(false);
 
   useEffect(() => {
     const fetchLedger = async () => {
@@ -44,11 +46,58 @@ export default function LedgerPage() {
     return date.toLocaleDateString('en-US', { month: 'long', year: 'numeric' });
   };
 
+  const handleDownloadCsv = async () => {
+    if (downloading) return;
+    setDownloading(true);
+    try {
+      const res = await fetch('/api/ledger/csv');
+      if (!res.ok) throw new Error('Failed to download CSV');
+      const blob = await res.blob();
+      const url = window.URL.createObjectURL(blob);
+      const a = document.createElement('a');
+      a.href = url;
+      const disposition = res.headers.get('Content-Disposition');
+      const match = disposition?.match(/filename="(.+)"/);
+      a.download = match?.[1] ?? `portfolio-ledger-${new Date().toISOString().split('T')[0]}.csv`;
+      document.body.appendChild(a);
+      a.click();
+      a.remove();
+      window.URL.revokeObjectURL(url);
+      toast.success('CSV downloaded');
+    } catch {
+      toast.error('Failed to download CSV');
+    } finally {
+      setDownloading(false);
+    }
+  };
+
   return (
     <DashboardLayout>
-      <div className="mb-8">
-        <h1 className="text-3xl font-bold text-white">Portfolio Ledger</h1>
-        <p className="text-gray-400 mt-1">Historical monthly performance breakdown</p>
+      <div className="mb-8 flex items-start justify-between gap-4">
+        <div>
+          <h1 className="text-3xl font-bold text-white">Portfolio Ledger</h1>
+          <p className="text-gray-400 mt-1">Historical monthly performance breakdown</p>
+        </div>
+        <Button
+          variant="secondary"
+          size="sm"
+          loading={downloading}
+          loadingText="Downloading..."
+          disabled={loading || data.length === 0}
+          onClick={handleDownloadCsv}
+          icon={
+            <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path
+                strokeLinecap="round"
+                strokeLinejoin="round"
+                strokeWidth={2}
+                d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4"
+              />
+            </svg>
+          }
+        >
+          Download CSV
+        </Button>
       </div>
 
       {loading ? (
