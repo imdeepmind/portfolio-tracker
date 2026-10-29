@@ -15,16 +15,20 @@ interface ExpenseCategoryChartProps {
 }
 
 const CATEGORY_COLORS = [
-  '#f59e0b', // Amber
-  '#10b981', // Emerald
-  '#3b82f6', // Blue
-  '#06b6d4', // Cyan
-  '#a855f7', // Purple
-  '#6366f1', // Indigo
-  '#ec4899', // Pink
-  '#f43f5e', // Rose
-  '#14b8a6', // Teal
-  '#64748b', // Slate
+  '#f59e0b', // Amber (Food & Dining)
+  '#10b981', // Emerald (Groceries)
+  '#3b82f6', // Blue (Rent & Housing)
+  '#06b6d4', // Cyan (Utilities & Bills)
+  '#a855f7', // Purple (Shopping)
+  '#6366f1', // Indigo (Transportation)
+  '#0ea5e9', // Sky (Travel)
+  '#84cc16', // Lime (Travel - Trekking)
+  '#f97316', // Orange (Travel - Bike Ride)
+  '#2563eb', // Royal Blue (Travel - Car)
+  '#ec4899', // Pink (Entertainment & Leisure)
+  '#f43f5e', // Rose (Health & Medical)
+  '#14b8a6', // Teal (Investment & Savings)
+  '#64748b', // Slate (Other)
 ];
 
 export default function ExpenseCategoryChart({ data }: ExpenseCategoryChartProps) {
