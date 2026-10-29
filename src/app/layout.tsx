@@ -1,7 +1,8 @@
-import type { Metadata } from 'next';
+import type { Metadata, Viewport } from 'next';
 import { Inter } from 'next/font/google';
 import './globals.css';
 import AuthProvider from '@/components/items/AuthProvider';
+import ServiceWorkerRegister from '@/components/items/ServiceWorkerRegister';
 import { Toaster } from 'react-hot-toast';
 import { Analytics } from '@vercel/analytics/next';
 import { SpeedInsights } from '@vercel/speed-insights/next';
@@ -10,6 +11,13 @@ const inter = Inter({
   subsets: ['latin'],
   variable: '--font-inter',
 });
+
+export const viewport: Viewport = {
+  themeColor: '#0a0a1a',
+  width: 'device-width',
+  initialScale: 1,
+  maximumScale: 5,
+};
 
 export const metadata: Metadata = {
   title: {
@@ -27,6 +35,16 @@ export const metadata: Metadata = {
   ],
   authors: [{ name: 'Abhishek Chatterjee' }],
   creator: 'Abhishek Chatterjee',
+  appleWebApp: {
+    capable: true,
+    statusBarStyle: 'black-translucent',
+    title: 'Portfolio Tracker',
+  },
+  icons: {
+    icon: '/favicon.ico',
+    apple: '/icons/apple-touch-icon.png',
+  },
+  manifest: '/manifest.webmanifest',
   openGraph: {
     type: 'website',
     locale: 'en_US',
@@ -63,6 +81,7 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body className={`${inter.variable} font-sans antialiased`}>
+        <ServiceWorkerRegister />
         <AuthProvider>{children}</AuthProvider>
         <Toaster
           position="top-right"

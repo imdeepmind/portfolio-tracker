@@ -34,3 +34,33 @@ export const formatDateTime = (date: string): string =>
     hour: '2-digit',
     minute: '2-digit',
   });
+
+export const EXPENSE_CATEGORIES = [
+  'Food & Dining',
+  'Groceries',
+  'Rent & Housing',
+  'Utilities & Bills',
+  'Shopping',
+  'Transportation',
+  'Travel',
+  'Travel - Trekking',
+  'Travel - Bike Ride',
+  'Travel - Car',
+  'Entertainment & Leisure',
+  'Health & Medical',
+  'Investment & Savings',
+  'Other',
+] as const;
+
+export type ExpenseCategory = (typeof EXPENSE_CATEGORIES)[number];
+
+export const EXPENSE_SOURCES = [
+  'Bank Account',
+  'Credit Card',
+  'Debit Card',
+  'UPI / Digital Wallet',
+  'Cash',
+  'Other',
+] as const;
+
+export type ExpenseSource = (typeof EXPENSE_SOURCES)[number];
