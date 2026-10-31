@@ -714,7 +714,7 @@ export default function ExpensesPage() {
 
       {/* Add Expense Modal */}
       {isModalOpen && (
-        <div className="fixed inset-0 z-50 flex items-center justify-center p-4 overflow-y-auto">
+        <div className="fixed inset-0 z-50 flex items-center justify-center p-4 overflow-y-auto pt-[env(safe-area-inset-top)] pb-[env(safe-area-inset-bottom)]">
           <div className="fixed inset-0 bg-black/60 backdrop-blur-sm" onClick={handleCloseModal} />
           <div className="relative w-full max-w-lg backdrop-blur-xl bg-[#141424]/95 border border-white/[0.1] rounded-2xl p-5 sm:p-6 shadow-2xl shadow-black/50 my-8">
             <div className="flex items-center justify-between pb-3 border-b border-white/[0.06] mb-4">
