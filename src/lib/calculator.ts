@@ -10,8 +10,6 @@ export interface CalculatorInputs {
   monthlyExpenseCurrent: number; // pre-retirement monthly expense in today's money (e.g. 80k)
   monthlyFreelance: number;
   withdrawalRate: number; // 0.03 - 0.05
-  excludeEPF: boolean;
-  excludeEmergency: boolean;
   freelanceDelayYears: number;
 }
 
@@ -37,9 +35,6 @@ export interface CalculatorOutputs {
   freelanceCoversSpending: boolean;
 }
 
-export const EPF_AMOUNT = 597000;
-export const EMERGENCY_AMOUNT = 560000;
-
 export function monthlyReturnFromAnnual(r: number): number {
   return Math.pow(1 + r, 1 / 12) - 1;
 }
@@ -52,10 +47,7 @@ export function simulateCorpus(inputs: CalculatorInputs, targetAge: number): num
   const n = Math.max(0, targetAge - inputs.currentAge);
   const i = monthlyReturnFromAnnual(inputs.expectedReturn);
 
-  let corpus =
-    inputs.currentPortfolio -
-    (inputs.excludeEPF ? EPF_AMOUNT : 0) -
-    (inputs.excludeEmergency ? EMERGENCY_AMOUNT : 0);
+  let corpus = inputs.currentPortfolio;
   if (corpus < 0) corpus = 0;
 
   let contribution = inputs.monthlyInvestment;
@@ -288,10 +280,7 @@ export function simulateLifecycle(inputs: CalculatorInputs, untilAge = 80): Life
   const nRetireMonths = Math.max(0, (inputs.targetRetirementAge - inputs.currentAge) * 12);
   const totalMonths = Math.max(0, (untilAge - inputs.currentAge) * 12);
 
-  let corpus =
-    inputs.currentPortfolio -
-    (inputs.excludeEPF ? EPF_AMOUNT : 0) -
-    (inputs.excludeEmergency ? EMERGENCY_AMOUNT : 0);
+  let corpus = inputs.currentPortfolio;
   if (corpus < 0) corpus = 0;
   if (untilAge <= inputs.currentAge)
     return [

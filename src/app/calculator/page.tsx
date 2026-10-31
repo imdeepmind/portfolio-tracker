@@ -37,8 +37,6 @@ const DEFAULT_INPUTS: CalculatorInputs = {
   monthlyExpenseCurrent: 80000,
   monthlyFreelance: 15000,
   withdrawalRate: 0.035,
-  excludeEPF: false,
-  excludeEmergency: false,
   freelanceDelayYears: 0,
 };
 
@@ -323,30 +321,7 @@ export default function CalculatorPage() {
                 onChange={(v) => update('withdrawalRate', v / 100)}
               />
 
-              <div className="pt-4 border-t border-white/[0.06] space-y-3">
-                <p className="text-sm font-medium text-gray-300">Optional toggles</p>
-                <label className="flex items-start gap-3 cursor-pointer">
-                  <input
-                    type="checkbox"
-                    checked={inputs.excludeEPF}
-                    onChange={(e) => update('excludeEPF', e.target.checked)}
-                    className="mt-1"
-                  />
-                  <span className="text-sm text-gray-300">
-                    Exclude EPF (₹5.97 lakh) – not available at 35-40
-                  </span>
-                </label>
-                <label className="flex items-start gap-3 cursor-pointer">
-                  <input
-                    type="checkbox"
-                    checked={inputs.excludeEmergency}
-                    onChange={(e) => update('excludeEmergency', e.target.checked)}
-                    className="mt-1"
-                  />
-                  <span className="text-sm text-gray-300">
-                    Exclude emergency layers (about ₹5.6 lakh)
-                  </span>
-                </label>
+              <div className="pt-4 border-t border-white/[0.06]">
                 <SliderField
                   label="Freelance starts late (years)"
                   value={inputs.freelanceDelayYears}
