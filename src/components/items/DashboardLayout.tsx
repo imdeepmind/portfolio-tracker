@@ -30,7 +30,7 @@ export default function DashboardLayout({ children }: { children: React.ReactNod
       {/* Main content area — offset by sidebar on desktop */}
       <div className="lg:pl-64">
         {/* Mobile top bar */}
-        <div className="sticky top-0 z-20 lg:hidden border-b border-white/[0.06] bg-[#0a0a1a]/80 backdrop-blur-xl">
+        <div className="sticky top-0 z-20 lg:hidden border-b border-white/[0.06] bg-[#0a0a1a]/95 backdrop-blur-xl pt-[env(safe-area-inset-top)]">
           <div className="flex items-center justify-between px-4 py-3">
             <button
               onClick={() => setSidebarOpen(true)}
@@ -63,7 +63,9 @@ export default function DashboardLayout({ children }: { children: React.ReactNod
         </div>
 
         {/* Page content — full width */}
-        <main className="relative z-10 px-6 py-8 lg:px-10 lg:py-10">{children}</main>
+        <main className="relative z-10 px-4 sm:px-6 py-6 sm:py-8 lg:px-10 lg:py-10 pb-[calc(2.5rem+env(safe-area-inset-bottom))]">
+          {children}
+        </main>
       </div>
     </div>
   );
