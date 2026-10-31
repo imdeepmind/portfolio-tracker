@@ -20,7 +20,7 @@ AI agents must always create a dedicated git branch for each task or issue befor
 
 ### Branch Rules
 
-- **Branch Off Latest `main`**: Always ensure your branch is created from the latest commit on `main`.
+- **Branch Off Latest `develop`**: Always ensure your branch is created from the latest commit on `develop`.
 - **Single Issue Scope**: Keep branches strictly focused on a single issue. Do not mix unrelated changes, refactorings, or fixes in the same branch.
 - **Never Commit Directly to Protected Branches**: Never commit or push directly to `main` or `develop`.
 
@@ -131,6 +131,7 @@ The repository uses **Husky** and **lint-staged** to automate quality checks:
 - **Client Components**: Isolate client-side state, event handlers, and browser APIs to leaf components marked with `'use client'`.
 - **Route Handlers**: Implement API endpoints in `src/app/api/.../route.ts` using named HTTP exports (`GET`, `POST`, `PUT`, `DELETE`).
 - **Asynchronous Route Params**: In Next.js 16, dynamic route `params` are promises. Always await them:
+
   ```typescript
   export async function GET(_req: NextRequest, { params }: { params: Promise<{ id: string }> }) {
     const { id } = await params;
