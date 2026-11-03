@@ -13,7 +13,11 @@ const inter = Inter({
 });
 
 export const viewport: Viewport = {
-  themeColor: '#0a0a1a',
+  themeColor: [
+    { media: '(prefers-color-scheme: light)', color: '#0a0a1a' },
+    { media: '(prefers-color-scheme: dark)', color: '#0a0a1a' },
+  ],
+  viewportFit: 'cover',
   width: 'device-width',
   initialScale: 1,
   maximumScale: 5,
@@ -79,8 +83,8 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en">
-      <body className={`${inter.variable} font-sans antialiased`}>
+    <html lang="en" className="dark bg-[#0a0a1a]">
+      <body className={`${inter.variable} font-sans antialiased bg-[#0a0a1a] text-[#ededed]`}>
         <ServiceWorkerRegister />
         <AuthProvider>{children}</AuthProvider>
         <Toaster

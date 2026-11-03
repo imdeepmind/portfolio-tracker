@@ -29,10 +29,17 @@
   --success: #34d399;
 }
 
+html {
+  background-color: #0a0a1a;
+  color-scheme: dark;
+}
+
 body {
   color: var(--foreground);
   background: linear-gradient(135deg, var(--background-start), var(--background-end));
+  background-color: #0a0a1a;
   min-height: 100vh;
+  min-height: 100dvh;
   font-family:
     var(--font-inter),
     system-ui,

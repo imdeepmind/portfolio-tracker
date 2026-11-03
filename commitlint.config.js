@@ -3,22 +3,22 @@ module.exports = {
   rules: {
     'type-enum': [2, 'always', ['feat', 'chore', 'ci', 'bug']],
     'header-max-length': [2, 'always', 120],
-    'subject-case': [0], // Disable to allow JIRA key
+    'subject-case': [0], // Disable to allow issue number
     'subject-empty': [2, 'never'],
     'type-case': [2, 'always', 'lower-case'],
     'scope-case': [2, 'always', 'lower-case'],
     'subject-full-stop': [2, 'never', '.'],
-    'header-match-jira': [2, 'always'],
+    'header-match-issue': [2, 'always'],
   },
   plugins: [
     {
       rules: {
-        'header-match-jira': ({ header }) => {
-          // type(scope): PT-NUMBER: message
-          const regex = /^(feat|chore|ci|bug)\([a-z-]+\): PT-\d+: .+/;
+        'header-match-issue': ({ header }) => {
+          // type(scope): #NUMBER: message
+          const regex = /^(feat|chore|ci|bug)\([a-z0-9-]+\): #\d+: .+/;
           return [
             regex.test(header),
-            `Commit message must follow the convention: type(scope): PT-<NUMBER>: message\nTypes: feat, chore, ci, bug`,
+            `Commit message must follow the convention: type(scope): #<NUMBER>: message\nTypes: feat, chore, ci, bug`,
           ];
         },
       },

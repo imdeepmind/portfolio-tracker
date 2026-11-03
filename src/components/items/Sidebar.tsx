@@ -166,7 +166,7 @@ export default function Sidebar({ open, onClose }: SidebarProps) {
 
       {/* Mobile drawer */}
       <aside
-        className={`fixed inset-y-0 left-0 z-50 w-64 bg-[#0d0d1a]/95 backdrop-blur-xl border-r border-white/[0.06] transform transition-transform duration-300 ease-in-out lg:hidden ${
+        className={`fixed inset-y-0 left-0 z-50 w-64 bg-[#0d0d1a]/95 backdrop-blur-xl border-r border-white/[0.06] transform transition-transform duration-300 ease-in-out lg:hidden pt-[env(safe-area-inset-top)] pb-[env(safe-area-inset-bottom)] ${
           open ? 'translate-x-0' : '-translate-x-full'
         }`}
       >
